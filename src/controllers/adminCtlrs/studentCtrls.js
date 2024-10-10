@@ -5,10 +5,18 @@ const studentCtrls = (req, res) => {
 
   console.log(req.query.voice);
   const kitty = new Cat({ name: req.query.name });
-  kitty.save().then(() => console.log("meow"));
-  res.status(200).json({
-    message: "Student Controller",
-  });
+  kitty
+    .save()
+    .then(() => {
+      res.status(200).json({
+        message: "Data saved successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
 };
 
 module.exports = studentCtrls;
